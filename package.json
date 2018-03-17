@@ -4,6 +4,7 @@
   "description": "Chrome extension for tab management",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src",
     "clean": "rm -rf ./static/bundles",
     "build": "npm run clean && NODE_ENV=production webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +12,9 @@
   "author": "Ammar Khaku",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^4.19.0",
+    "eslint-config-evernote": "^3.0.1",
+    "eslint-plugin-evernote": "^1.0.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
   }

@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "eslint-config-evernote",
+  ],
+  "rules": {
+    "comma-dangle": [2, "always-multiline"]
+  }
+}
+
