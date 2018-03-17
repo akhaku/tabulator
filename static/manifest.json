@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+
+  "name": "Tabulator",
+  "author": "Ammar Khaku",
+  "version": "1.0.0",
+  "description": "Manage your open tabs from the new tab page",
+
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+
+  "background": {
+    "scripts": ["bundles/background.bundle.js"],
+    "persistent": true
+  },
+
+  "permissions": [
+    "tabs",
+    "storage",
+    "management",
+    "webNavigation",
+    "<all_urls>"
+  ],
+
+  "minimum_chrome_version": "50"
+}
