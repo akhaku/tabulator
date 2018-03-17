@@ -1,0 +1,11 @@
+{
+  "name": "tabulator",
+  "version": "1.0.0",
+  "description": "Chrome extension for tab management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ammar Khaku",
+  "license": "ISC"
+}
