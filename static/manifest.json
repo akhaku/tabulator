@@ -11,7 +11,7 @@
   },
 
   "background": {
-    "scripts": ["bundles/background.bundle.js"],
+    "scripts": ["bundles/background.js"],
     "persistent": true
   },
 
