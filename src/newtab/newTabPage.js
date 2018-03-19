@@ -1,5 +1,6 @@
 import React from 'react';
 
+import * as api from 'src/common/api';
 import TabList from 'src/newtab/tabList';
 
 import './newTabPage.less';
@@ -13,18 +14,19 @@ export default class NewTabPage extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({tabs: [{title: 'tab1'}, {title: 'tab2'}, {title: 'tab3'}, {title: 'tab4'}]});
+    const tabs = api.getAllTabs();
+    this.setState({tabs});
   }
 
   clickCallback = tabId => {
-    console.log(`clicked tab with ID ${tabId}`);
+    api.navigateToTab(tabId);
   };
 
   render() {
     return (
       <div className="Component-NewTabPage">
         <h1>{'Tabulator'}</h1>
-        <TabList clickCallback={this.clickCallback} tabs={this.state.tabs}/>
+        <TabList clickCallback={api.navigateToTab} tabs={this.state.tabs}/>
       </div>
     );
   }

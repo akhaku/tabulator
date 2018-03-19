@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import {tabPropType} from 'src/common/tabModel';
 import TabDisplay from 'src/newtab/tabDisplay';
-import {tabPropType} from 'src/newtab/tabModel';
 
 import './tabList.less';
 
