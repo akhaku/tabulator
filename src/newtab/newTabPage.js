@@ -13,7 +13,7 @@ export default class NewTabPage extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({tabs: ['tab1', 'tab2', 'tab3', 'tab4']});
+    this.setState({tabs: [{title: 'tab1'}, {title: 'tab2'}, {title: 'tab3'}, {title: 'tab4'}]});
   }
 
   render() {
