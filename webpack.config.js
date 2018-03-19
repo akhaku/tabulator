@@ -1,5 +1,7 @@
 const path = require('path');
 
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: {
     background: './src/background/index.js',
@@ -13,14 +15,14 @@ module.exports = {
     }, {
       test: /\.less$/,
       exclude: /node_modules/,
-      use: [
-        {'loader': 'file-loader', 'options': {'name': '[name].css'}},
-        {'loader': 'extract-loader', 'options': {'publicPath': ''}},
-        {'loader': 'css-loader'},
-        {'loader': 'less-loader'}
-      ]
+      use: ExtractTextPlugin.extract({
+        use: ['css-loader', 'less-loader']
+      })
     }]
   },
+  plugins: [
+    new ExtractTextPlugin('[name].css')
+  ],
   resolve: {
     alias: {src: `${__dirname}/src`}
   },
