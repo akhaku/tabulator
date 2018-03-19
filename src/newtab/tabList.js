@@ -6,8 +6,10 @@ import {tabPropType} from 'src/newtab/tabModel';
 
 import './tabList.less';
 
-export default function TabList({tabs}) {
-  const tabDisplays = tabs.map(tab => <TabDisplay tab={tab}/>);
+export default function TabList({clickCallback, tabs}) {
+  const tabDisplays = tabs.map(tab => (
+    <TabDisplay tab={tab} clickCallback={clickCallback}/>
+  ));
   return (
     <div className="Component-TabList">
       {tabDisplays}
@@ -16,5 +18,6 @@ export default function TabList({tabs}) {
 }
 
 TabList.propTypes = {
+  clickCallback: PropTypes.func.isRequired,
   tabs: PropTypes.arrayOf(tabPropType).isRequired,
 };

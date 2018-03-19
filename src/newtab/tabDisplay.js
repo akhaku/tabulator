@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import {tabPropType} from 'src/newtab/tabModel';
 
 import './tabDisplay.less';
 
-export default function TabDisplay({tab}) {
+export default function TabDisplay({tab, clickCallback}) {
   return (
-    <div className="Component-TabDisplay">
+    <div onClick={() => clickCallback(tab.id)} className="Component-TabDisplay">
       <p className="Text-TabTitle">
         {tab.title}
       </p>
@@ -15,5 +16,6 @@ export default function TabDisplay({tab}) {
 }
 
 TabDisplay.propTypes = {
+  clickCallback: PropTypes.func.isRequired,
   tab: tabPropType,
 };
