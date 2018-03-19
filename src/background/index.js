@@ -47,30 +47,25 @@ function captureAndSaveVisibleTab(tabId, tab, attemptsSoFar, callback) {
     return;
   }
   chrome.tabs.captureVisibleTab(null, {format: 'jpeg', quality: 5}, dataUri => {
-    if (chrome.runtime.lastError) {
-      console.warn('Chrome runtime error capturing tab', chrome.runtime.lastError);
-      callback(false);
-    } else {
-      if (!dataUri) {
-        if (attemptsSoFar++ < 5) {
-          setTimeout(() => captureAndSaveVisibleTab(tabId, tab, attemptsSoFar), 500);
-        } else {
-          console.log(`Giving up on capturing tab ${tabId}`);
-          callback(false);
-        }
+    if (!dataUri || typeof dataUri !== 'string') {
+      if (attemptsSoFar++ < 5) {
+        setTimeout(() => captureAndSaveVisibleTab(tabId, tab, attemptsSoFar), 500);
       } else {
-        const foundTab = window.tabs.find(t => t.id === tabId);
-        if (foundTab) {
-          foundTab.image = dataUri;
-          window.images[tabId] = dataUri;
-          // TODO update tab image and other stuff on navigation
-          // TODO deal with tabs being closed (eg remove image, tab object)
-          // TODO deal with tabs being moved around
-        } else {
-          console.log(`Tab with id ${tabId} missing after capturing image`);
-        }
-        callback(true);
+        console.log(`Giving up on capturing tab ${tabId}`);
+        callback(false);
       }
+    } else {
+      const foundTab = window.tabs.find(t => t.id === tabId);
+      if (foundTab) {
+        foundTab.image = dataUri;
+        window.images[tabId] = dataUri;
+        // TODO update tab image and other stuff on navigation
+        // TODO deal with tabs being closed (eg remove image, tab object)
+        // TODO deal with tabs being moved around
+      } else {
+        console.log(`Tab with id ${tabId} missing after capturing image`);
+      }
+      callback(true);
     }
   });
 }
