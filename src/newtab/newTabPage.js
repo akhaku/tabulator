@@ -2,6 +2,8 @@ import React from 'react';
 
 import TabList from 'src/newtab/tabList';
 
+import './newTabPage.less';
+
 export default class NewTabPage extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +18,7 @@ export default class NewTabPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="Component-NewTabPage">
         <h1>{'Tabulator'}</h1>
         <TabList tabs={this.state.tabs}/>
       </div>

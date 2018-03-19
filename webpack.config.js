@@ -10,6 +10,15 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
       use: ['babel-loader']
+    }, {
+      test: /\.less$/,
+      exclude: /node_modules/,
+      use: [
+        {'loader': 'file-loader', 'options': {'name': '[name].css'}},
+        {'loader': 'extract-loader', 'options': {'publicPath': ''}},
+        {'loader': 'css-loader'},
+        {'loader': 'less-loader'}
+      ]
     }]
   },
   resolve: {
