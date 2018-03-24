@@ -5,12 +5,14 @@ export class Tab {
     this.title = chromeTabObject.title;
     this.favIcon = chromeTabObject.favIconUrl;
     this.id = chromeTabObject.id;
+    this.windowId = chromeTabObject.windowId;
     this.image = images[chromeTabObject.id] || null;
   }
 }
 
 export const tabPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
   image: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  windowId: PropTypes.number.isRequired,
 });

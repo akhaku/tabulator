@@ -22,8 +22,10 @@ export default class NewTabPage extends React.Component {
   }
 
   refreshTabs = () => {
-    const tabs = api.getAllTabs();
-    this.setState({tabs});
+    api.getCurrentWindowId().then(id => {
+      const tabs = api.getAllTabs().filter(t => t.windowId === id);
+      this.setState({tabs});
+    });
   };
 
   render() {

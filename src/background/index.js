@@ -22,13 +22,15 @@ chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse)
 chrome.tabs.onActiveChanged.addListener(tabId => {
   chrome.tabs.get(tabId, tab => {
     captureAndSaveVisibleTab(tabId, tab, 0, () => {
+      // we could probably optimize this if needed
       fetchTabs(() => api.fireMessage(messages.TAB_IMAGE_CAPTURED));
     });
   });
 });
 
 /**
- * Fetches all the tabs into an object. Fires the callback after setting the tabs.
+ * Fetches all the tabs into a list of tab objects. Fires the callback after setting the
+ * tabs.
  */
 function fetchTabs(callback) {
   chrome.tabs.query({}, tabs => {
