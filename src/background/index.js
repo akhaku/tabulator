@@ -1,11 +1,12 @@
 /* globals chrome,console,setTimeout,window */
+import * as api from 'src/common/api';
 import * as messages from 'src/common/messages';
 import {Tab} from 'src/common/tabModel';
 
 window.images = {};
 window.tabs = [];
 
-fetchTabs();
+fetchTabs(() => {});
 
 chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse) => {
   switch (message.type) {
@@ -13,7 +14,7 @@ chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse)
       chrome.tabs.update(parseInt(message.value), {active: true});
       break;
     default:
-      console.warn(`Encountered unhandled message: ${message.type}`);
+      console.warn(`Background page encountered unhandled message: ${message.type}`);
       break;
   }
 });
@@ -21,18 +22,19 @@ chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse)
 chrome.tabs.onActiveChanged.addListener(tabId => {
   chrome.tabs.get(tabId, tab => {
     captureAndSaveVisibleTab(tabId, tab, 0, () => {
-      fetchTabs(); // TODO trigger refresh
+      fetchTabs(() => api.fireMessage(messages.TAB_IMAGE_CAPTURED));
     });
   });
 });
 
 /**
- * Fetches all the tabs into an object.
+ * Fetches all the tabs into an object. Fires the callback after setting the tabs.
  */
-function fetchTabs() {
+function fetchTabs(callback) {
   chrome.tabs.query({}, tabs => {
-    window.tabs = tabs.filter(t => t.url.indexOf('http' === 0))
+    window.tabs = tabs.filter(t => t.url.indexOf('http') === 0)
       .map(t => new Tab(t, window.images));
+    callback();
   });
 }
 

@@ -8,7 +8,7 @@ import './tabList.less';
 
 export default function TabList({clickCallback, tabs}) {
   const tabDisplays = tabs.map(tab => (
-    <TabDisplay tab={tab} clickCallback={clickCallback}/>
+    <TabDisplay key={tab.id} tab={tab} clickCallback={clickCallback}/>
   ));
   return (
     <div className="Component-TabList">

@@ -1,5 +1,4 @@
-/* globals chrome */
-import * as messages from 'src/common/messages';
+/* globals console,chrome */
 
 /* Mostly a wrapper around Chrome extension APIs */
 
@@ -10,6 +9,16 @@ export function getAllTabs() {
   return chrome.extension.getBackgroundPage().tabs;
 }
 
-export function navigateToTab(tabId) {
-  chrome.runtime.sendMessage({type: messages.GO_TO_TAB, value: tabId});
+export function fireMessage(messageType, messageValue) {
+  chrome.runtime.sendMessage({type: messageType, value: messageValue});
+}
+
+export function attachMessageListeners(messageNameToCallback) {
+  chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse) => {
+    if (messageNameToCallback[message.type]) {
+      messageNameToCallback[message.type]();
+    } else {
+      console.warn(`New tab page encountered unhandled message: ${message.type}`);
+    }
+  });
 }

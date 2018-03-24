@@ -10,7 +10,7 @@ export class Tab {
 }
 
 export const tabPropType = PropTypes.shape({
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string,
 });

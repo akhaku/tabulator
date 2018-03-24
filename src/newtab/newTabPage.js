@@ -1,6 +1,7 @@
 import React from 'react';
 
 import * as api from 'src/common/api';
+import * as messages from 'src/common/messages';
 import TabList from 'src/newtab/tabList';
 
 import './newTabPage.less';
@@ -14,19 +15,25 @@ export default class NewTabPage extends React.Component {
   }
 
   componentWillMount() {
-    const tabs = api.getAllTabs();
-    this.setState({tabs});
+    const messageNameToCallback = {};
+    messageNameToCallback[messages.TAB_IMAGE_CAPTURED] = this.refreshTabs;
+    api.attachMessageListeners(messageNameToCallback);
+    this.refreshTabs();
   }
 
-  clickCallback = tabId => {
-    api.navigateToTab(tabId);
+  refreshTabs = () => {
+    const tabs = api.getAllTabs();
+    this.setState({tabs});
   };
 
   render() {
     return (
       <div className="Component-NewTabPage">
         <h1>{'Tabulator'}</h1>
-        <TabList clickCallback={api.navigateToTab} tabs={this.state.tabs}/>
+        <TabList
+          clickCallback={tabId => api.fireMessage(messages.GO_TO_TAB, tabId)}
+          tabs={this.state.tabs}
+        />
       </div>
     );
   }
