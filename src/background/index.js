@@ -3,7 +3,14 @@ import * as api from 'src/common/api';
 import * as messages from 'src/common/messages';
 import {Tab} from 'src/common/tabModel';
 
+/**
+ * A map of tab ID to an object containing the url and a base64 encoded jpeg thumbnail
+ */
 window.images = {};
+/**
+ * A list of Tab objects, in order of appearance in the browser. Note that this is across
+ * all open windows.
+ */
 window.tabs = [];
 
 fetchTabs(() => {});
@@ -26,6 +33,17 @@ chrome.tabs.onActiveChanged.addListener(tabId => {
       fetchTabs(() => api.fireMessage(messages.TAB_IMAGE_CAPTURED));
     });
   });
+});
+
+chrome.tabs.onRemoved.addListener(tabId => {
+  delete window.images[tabId];
+  fetchTabs(() => api.fireMessage(messages.TAB_CLOSED));
+});
+chrome.tabs.onUpdated.addListener(() => {
+  fetchTabs(() => api.fireMessage(messages.TAB_UPDATED));
+});
+chrome.tabs.onMoved.addListener(() => {
+  fetchTabs(() => api.fireMessage(messages.TAB_MOVED));
 });
 
 /**
@@ -62,10 +80,7 @@ function captureAndSaveVisibleTab(tabId, tab, attemptsSoFar, callback) {
       const foundTab = window.tabs.find(t => t.id === tabId);
       if (foundTab) {
         foundTab.image = dataUri;
-        window.images[tabId] = dataUri;
-        // TODO update tab image and other stuff on navigation
-        // TODO deal with tabs being closed (eg remove image, tab object)
-        // TODO deal with tabs being moved around
+        window.images[tabId] = {url: foundTab.url, image: dataUri};
       } else {
         console.log(`Tab with id ${tabId} missing after capturing image`);
       }

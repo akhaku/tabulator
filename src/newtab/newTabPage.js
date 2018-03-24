@@ -18,7 +18,10 @@ export default class NewTabPage extends React.Component {
 
   componentWillMount() {
     const messageNameToCallback = {};
+    messageNameToCallback[messages.TAB_CLOSED] = this.refreshTabs;
     messageNameToCallback[messages.TAB_IMAGE_CAPTURED] = this.refreshTabs;
+    messageNameToCallback[messages.TAB_MOVED] = this.refreshTabs;
+    messageNameToCallback[messages.TAB_UPDATED] = this.refreshTabs;
     api.attachMessageListeners(messageNameToCallback);
     this.refreshTabs();
   }

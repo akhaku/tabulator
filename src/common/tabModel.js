@@ -7,7 +7,17 @@ export class Tab {
     this.title = chromeTabObject.title;
     this.url = chromeTabObject.url;
     this.windowId = chromeTabObject.windowId;
-    this.image = images[chromeTabObject.id] || null;
+    this.image = getImageForTab(images, chromeTabObject.id, chromeTabObject.url);
+  }
+}
+
+function getImageForTab(images, tabId, tabUrl) {
+  if (!images[tabId]) {
+    return null;
+  } else if (tabUrl !== images[tabId].url) {
+    return null;
+  } else {
+    return images[tabId].image;
   }
 }
 
