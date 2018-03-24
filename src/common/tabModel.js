@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 
 export class Tab {
   constructor(chromeTabObject, images) {
-    this.title = chromeTabObject.title;
     this.favIcon = chromeTabObject.favIconUrl;
     this.id = chromeTabObject.id;
+    this.title = chromeTabObject.title;
+    this.url = chromeTabObject.url;
     this.windowId = chromeTabObject.windowId;
     this.image = images[chromeTabObject.id] || null;
   }
