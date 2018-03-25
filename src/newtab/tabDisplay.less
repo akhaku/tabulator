@@ -1,3 +1,5 @@
+@import '../variables.less';
+
 @display-side-padding: 23px;
 
 .Component-TabDisplay {
@@ -18,7 +20,7 @@
   .Image-TabThumbnail {
     width: 200px;
     height: 111px;
-    padding: 0 @display-side-padding;
+    padding: 30px @display-side-padding;
   }
 
   .Icon-Close {
@@ -29,9 +31,16 @@
     width: 20px;
     height: 20px;
     transition: all .3s ease-in-out;
+    line {
+      stroke: @light-red;
+    }
     &:hover {
       opacity: 1;
       transform: scale(1.1);
+
+      line {
+        stroke: @medium-red;
+      }
     }
   }
 
@@ -40,6 +49,8 @@
   }
 
   .Text-Overlay {
+    font-family: @sans-serif-fonts;
+    color: @medium-red;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -59,10 +70,11 @@
   }
 
   .Text-TabTitle {
+    font-family: @serif-fonts;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    padding: 20px @display-side-padding 30px;
+    padding: 20px @display-side-padding 0;
   }
 }

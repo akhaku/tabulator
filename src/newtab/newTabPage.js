@@ -38,7 +38,7 @@ export default class NewTabPage extends React.Component {
       || t.title.includes(this.state.filter) || t.url.includes(this.state.filter));
     return (
       <div className="Component-NewTabPage">
-        <h1>{'Tabulator'}</h1>
+        <h1 className="Text-Header">{'Tabulator'}</h1>
         <SearchFilter
           changeCallback={v => this.setState({filter: v})}
           filter={this.state.filter}

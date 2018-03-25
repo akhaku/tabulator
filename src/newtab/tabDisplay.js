@@ -25,8 +25,8 @@ export default function TabDisplay({tab, clickCallback, closeCallback}) {
         title={'Close tab'}
       >
         <svg viewBox="0 0 12 12" version="1.1">
-          <line x1="1" y1="10" x2="10" y2="1" stroke="rgba(0,0,0,0.8)" strokeWidth="1"/>
-          <line x1="1" y1="1" x2="10" y2="10" stroke="rgba(0,0,0,0.8)" strokeWidth="1"/>
+          <line x1="1" y1="10" x2="10" y2="1" strokeWidth="1"/>
+          <line x1="1" y1="1" x2="10" y2="10" strokeWidth="1"/>
         </svg>
       </a>
       <div className="Text-TabTitle" title={tab.title}>
