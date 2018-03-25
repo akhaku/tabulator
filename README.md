@@ -33,4 +33,4 @@ I also highly recommend updating the `build` script in `package.json`, replacing
 ```
 Just make sure you don't check those changes in.
 
-When you make changes, `npm run build` to generate the changed files. For changes to the new tab page, refreshing that is sufficient, but for changes to the background page you'll need to either refresh the plugin, or refresh the background view from "inspect views in <chrome://extensions>. Any changes to the manifest require an extension refresh, also from <chrome://extensions>.
+When you make changes, `npm run build` to generate the changed files. For changes to the new tab page, refreshing that is sufficient, but for changes to the background page you'll need to either refresh the plugin, or refresh the background view from "inspect views" in <chrome://extensions>. Any changes to the manifest require an extension refresh, also from <chrome://extensions>.
