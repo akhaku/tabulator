@@ -17,9 +17,6 @@
 
   "permissions": [
     "tabs",
-    "storage",
-    "management",
-    "webNavigation",
     "<all_urls>"
   ],
 

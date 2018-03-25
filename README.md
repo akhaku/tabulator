@@ -12,3 +12,7 @@ Potential future features:
 - some sort of toast after closing a tab, with a quick link to re-open tab (is that even possible?)
 - visual indication of pinned tabs
 - maybe re-order tabs via drag and drop?
+
+Summary of Chrome permissions needed:
+- `<all_urls>`: [needed](https://developer.chrome.com/extensions/tabs#method-captureVisibleTab) to capture a screenshot of a tab
+- `tabs`: [needed](https://developer.chrome.com/extensions/tabs#type-Tab) to access the title and url of all tabs
