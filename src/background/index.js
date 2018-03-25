@@ -17,8 +17,11 @@ fetchTabs(() => {});
 
 chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse) => {
   switch (message.type) {
+    case messages.CLOSE_TAB:
+      chrome.tabs.remove(message.value);
+      break;
     case messages.GO_TO_TAB:
-      chrome.tabs.update(parseInt(message.value), {active: true});
+      chrome.tabs.update(message.value, {active: true});
       break;
     default:
       console.warn(`Background page encountered unhandled message: ${message.type}`);
@@ -68,7 +71,7 @@ function fetchTabs(callback) {
  * true if the capture succeeded, false if it failed.
  */
 function captureAndSaveVisibleTab(tabId, tab, attemptsSoFar, callback) {
-  chrome.tabs.captureVisibleTab(null, {format: 'jpeg', quality: 5}, dataUri => {
+  chrome.tabs.captureVisibleTab(null, {format: 'jpeg', quality: 2}, dataUri => {
     if (!tab.active) {
       // the user switched away pretty quickly, we're not sure which tab we captured
       callback(false);
@@ -76,7 +79,7 @@ function captureAndSaveVisibleTab(tabId, tab, attemptsSoFar, callback) {
     }
     if (!dataUri || typeof dataUri !== 'string') {
       if (attemptsSoFar++ < 5) {
-        setTimeout(() => captureAndSaveVisibleTab(tabId, tab, attemptsSoFar), 500);
+        setTimeout(() => captureAndSaveVisibleTab(tabId, tab, attemptsSoFar, callback), 500);
       } else {
         console.log(`Giving up on capturing tab ${tabId}`);
         callback(false);

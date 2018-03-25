@@ -45,6 +45,7 @@ export default class NewTabPage extends React.Component {
         />
         <TabList
           clickCallback={tabId => api.fireMessage(messages.GO_TO_TAB, tabId)}
+          closeCallback={tabId => api.fireMessage(messages.CLOSE_TAB, tabId)}
           tabs={filteredTabs}
         />
       </div>

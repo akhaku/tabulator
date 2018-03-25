@@ -1,3 +1,5 @@
+@display-side-padding: 23px;
+
 .Component-TabDisplay {
   background-color: #FFFFFF;
   cursor: pointer;
@@ -7,17 +9,60 @@
   font-family: helvetica, sans-serif;
   font-size: 14px;
   line-height: 18px;
-  padding: 23px;
   box-sizing: border-box;
   width: 245px;
   height: 245px;
   margin: 10px;
   color: #4A4A4A;
 
+  .Image-TabThumbnail {
+    width: 200px;
+    height: 111px;
+    padding: 0 @display-side-padding;
+  }
+
+  .Icon-Close {
+    opacity: 0.1;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 20px;
+    height: 20px;
+    transition: all .3s ease-in-out;
+    &:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  &:hover .Icon-Close {
+    opacity: 0.5;
+  }
+
+  .Text-Overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgba(255,255,255, 0.8);
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    width: 100%;
+    transition: opacity .2s ease-in-out;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  &:hover .Text-Overlay {
+    opacity: 1;
+  }
+
   .Text-TabTitle {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     overflow: hidden;
     -webkit-box-orient: vertical;
+    padding: 20px @display-side-padding 30px;
   }
 }

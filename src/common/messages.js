@@ -1,3 +1,4 @@
+export const CLOSE_TAB = 'closeTab';
 export const GO_TO_TAB = 'goToTab';
 export const TAB_CLOSED = 'tabClosed';
 export const TAB_IMAGE_CAPTURED = 'tabImageCaptured';
