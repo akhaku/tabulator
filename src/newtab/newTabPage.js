@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as api from 'src/common/api';
 import * as messages from 'src/common/messages';
+import EmptyState from 'src/newtab/emptyState';
 import Footer from 'src/newtab/footer';
 import SearchFilter from 'src/newtab/searchFilter';
 import TabList from 'src/newtab/tabList';
@@ -34,9 +35,18 @@ export default class NewTabPage extends React.Component {
     });
   };
 
+
   render() {
     const filteredTabs = this.state.tabs.filter(t => this.state.filter === ''
       || t.title.includes(this.state.filter) || t.url.includes(this.state.filter));
+    const tabListOrEmptyState = filteredTabs.length === 0
+      ? <EmptyState filtered={this.state.filter !== ''}/> : (
+        <TabList
+          clickCallback={tabId => api.fireMessage(messages.GO_TO_TAB, tabId)}
+          closeCallback={tabId => api.fireMessage(messages.CLOSE_TAB, tabId)}
+          tabs={filteredTabs}
+        />
+      );
     return (
       <div className="Component-NewTabPage">
         <h1 className="Text-Header">{'Tabulator'}</h1>
@@ -44,11 +54,7 @@ export default class NewTabPage extends React.Component {
           changeCallback={v => this.setState({filter: v})}
           filter={this.state.filter}
         />
-        <TabList
-          clickCallback={tabId => api.fireMessage(messages.GO_TO_TAB, tabId)}
-          closeCallback={tabId => api.fireMessage(messages.CLOSE_TAB, tabId)}
-          tabs={filteredTabs}
-        />
+        {tabListOrEmptyState}
         <Footer/>
       </div>
     );
