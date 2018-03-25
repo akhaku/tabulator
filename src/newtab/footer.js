@@ -8,7 +8,7 @@ export default function Footer() {
       <br/>
       <a
         className="Text-Link"
-        href="http://gettabulator.com"
+        href="https://gettabulator.com"
         target="_blank"
       >
         {'gettabulator.com'}
