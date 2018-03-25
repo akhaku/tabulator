@@ -5,6 +5,8 @@ import {tabPropType} from 'src/common/tabModel';
 
 import './tabDisplay.less';
 
+const urlReplaceRegex = /^https?\:\/\/(www.)?/;
+
 export default function TabDisplay({tab, clickCallback, closeCallback}) {
   const image = tab.image ? (
     <img className="Image-TabThumbnail" src={tab.image}/>
@@ -29,8 +31,11 @@ export default function TabDisplay({tab, clickCallback, closeCallback}) {
           <line x1="1" y1="1" x2="10" y2="10" strokeWidth="1"/>
         </svg>
       </a>
-      <div className="Text-TabTitle" title={tab.title}>
-        {tab.title}
+      <div className="Container-Text">
+        <div className="Text-TabTitle" title={tab.title}>{tab.title}</div>
+        <div className="Text-TabUrl" title={tab.url}>
+          {tab.url.replace(urlReplaceRegex, '')}
+        </div>
       </div>
       {image}
     </div>

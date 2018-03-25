@@ -69,6 +69,10 @@
     opacity: 1;
   }
 
+  .Container-Text {
+    height: 74px;
+  }
+
   .Text-TabTitle {
     font-family: @serif-fonts;
     display: -webkit-box;
@@ -76,5 +80,14 @@
     overflow: hidden;
     -webkit-box-orient: vertical;
     padding: 20px @display-side-padding 0;
+  }
+
+  .Text-TabUrl {
+    padding: 0 @display-side-padding;
+    color: @medium-red;
+    font-style: italic;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
