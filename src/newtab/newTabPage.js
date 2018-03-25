@@ -38,7 +38,8 @@ export default class NewTabPage extends React.Component {
 
   render() {
     const filteredTabs = this.state.tabs.filter(t => this.state.filter === ''
-      || t.title.includes(this.state.filter) || t.url.includes(this.state.filter));
+      || t.title.toLowerCase().includes(this.state.filter.toLowerCase())
+      || t.url.toLowerCase().includes(this.state.filter.toLowerCase()));
     const tabListOrEmptyState = filteredTabs.length === 0
       ? <EmptyState filtered={this.state.filter !== ''}/> : (
         <TabList
