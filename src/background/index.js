@@ -28,9 +28,14 @@ chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse)
 
 chrome.tabs.onActiveChanged.addListener(tabId => {
   chrome.tabs.get(tabId, tab => {
-    captureAndSaveVisibleTab(tabId, tab, 0, () => {
-      // we could probably optimize this if needed
-      fetchTabs(() => api.fireMessage(messages.TAB_IMAGE_CAPTURED));
+    if (tab.url.indexOf('http') !== 0) {
+      return;
+    }
+    captureAndSaveVisibleTab(tabId, tab, 0, captured => {
+      if (captured) {
+        // we could probably optimize this if needed
+        fetchTabs(() => api.fireMessage(messages.TAB_IMAGE_CAPTURED));
+      }
     });
   });
 });
@@ -63,12 +68,12 @@ function fetchTabs(callback) {
  * true if the capture succeeded, false if it failed.
  */
 function captureAndSaveVisibleTab(tabId, tab, attemptsSoFar, callback) {
-  // fail fast if we already switched away
-  if (!tab.active || tab.url.indexOf('http') !== 0) {
-    callback(false);
-    return;
-  }
   chrome.tabs.captureVisibleTab(null, {format: 'jpeg', quality: 5}, dataUri => {
+    if (!tab.active) {
+      // the user switched away pretty quickly, we're not sure which tab we captured
+      callback(false);
+      return;
+    }
     if (!dataUri || typeof dataUri !== 'string') {
       if (attemptsSoFar++ < 5) {
         setTimeout(() => captureAndSaveVisibleTab(tabId, tab, attemptsSoFar), 500);
