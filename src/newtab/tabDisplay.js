@@ -8,6 +8,7 @@ import './tabDisplay.less';
 const urlReplaceRegex = /^https?\:\/\/(www.)?/;
 
 export default function TabDisplay({tab, clickCallback, closeCallback}) {
+  const favIcon = tab.favIcon ? <img className="Image-FavIcon" src={tab.favIcon}/> : null;
   const image = tab.image ? (
     <img className="Image-TabThumbnail" src={tab.image}/>
   ) : null;
@@ -32,7 +33,7 @@ export default function TabDisplay({tab, clickCallback, closeCallback}) {
         </svg>
       </a>
       <div className="Container-Text">
-        <div className="Text-TabTitle" title={tab.title}>{tab.title}</div>
+        <div className="Text-TabTitle" title={tab.title}>{favIcon}{tab.title}</div>
         <div className="Text-TabUrl" title={tab.url}>
           {tab.url.replace(urlReplaceRegex, '')}
         </div>
