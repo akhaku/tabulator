@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as api from 'src/common/api';
 import * as messages from 'src/common/messages';
+import Footer from 'src/newtab/footer';
 import SearchFilter from 'src/newtab/searchFilter';
 import TabList from 'src/newtab/tabList';
 
@@ -48,6 +49,7 @@ export default class NewTabPage extends React.Component {
           closeCallback={tabId => api.fireMessage(messages.CLOSE_TAB, tabId)}
           tabs={filteredTabs}
         />
+        <Footer/>
       </div>
     );
   }
