@@ -1,5 +1,5 @@
 # Tabulator
-A tab management plugin
+A tab management plugin [gettabulator.com](https://gettabulator.com)
 
 ## Current features
 Tabulator overrides your new tab page with its own page. On this page, you can
