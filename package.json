@@ -7,7 +7,8 @@
     "lint": "eslint src",
     "clean": "rm -rf ./static/bundles",
     "build": "npm run clean && NODE_ENV=production webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "rm -f tabulator.zip && zip -r tabulator.zip static"
   },
   "author": "Ammar Khaku",
   "license": "ISC",
