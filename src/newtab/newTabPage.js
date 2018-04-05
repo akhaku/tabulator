@@ -50,7 +50,9 @@ export default class NewTabPage extends React.Component {
       );
     return (
       <div className="Component-NewTabPage">
-        <h1 className="Text-Header">{'Tabulator'}</h1>
+        <h1 className="Text-Header">
+          <img src="../images/logo.png" alt="Tabulator" className="Image-Logo"/>
+          {'Tabulator'}</h1>
         <SearchFilter
           changeCallback={v => this.setState({filter: v})}
           filter={this.state.filter}

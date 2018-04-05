@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "description": "Manage your open tabs from the new tab page",
   "icons": {
-    "128": "images-icon-128.png"
+    "128": "images/icon-128.png"
   },
 
   "chrome_url_overrides": {
