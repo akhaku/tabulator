@@ -12,6 +12,8 @@ export default function TabDisplay({tab, clickCallback, closeCallback}) {
   const image = tab.image ? (
     <img className="Image-TabThumbnail" src={tab.image}/>
   ) : null;
+  const pinIcon = !tab.pinned ? null
+    : <img className="Icon-Pin" src="images/pin.png" title="Pinned" alt="pinned"/>;
   return (
     <div className="Component-TabDisplay">
       <p onClick={() => clickCallback(tab.id)} className="Text-Overlay">
@@ -32,6 +34,7 @@ export default function TabDisplay({tab, clickCallback, closeCallback}) {
           <line x1="1" y1="1" x2="10" y2="10" strokeWidth="1"/>
         </svg>
       </a>
+      {pinIcon}
       <div className="Container-Text">
         <div className="Text-TabTitle" title={tab.title}>{favIcon}{tab.title}</div>
         <div className="Text-TabUrl" title={tab.url}>
