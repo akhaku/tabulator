@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse)
   }
 });
 
-chrome.tabs.onActiveChanged.addListener(tabId => {
+chrome.tabs.onActivated.addListener(({tabId}) => {
   chrome.tabs.get(tabId, tab => {
     if (tab.url.indexOf('http') !== 0) {
       return;
