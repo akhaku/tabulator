@@ -45,6 +45,16 @@ export default class NewTabPage extends React.Component {
         <TabList
           clickCallback={tabId => api.fireMessage(messages.GO_TO_TAB, tabId)}
           closeCallback={tabId => api.fireMessage(messages.CLOSE_TAB, tabId)}
+          onSortEndCallback={({oldIndex, newIndex}) => {
+            // convert oldIndex and newIndex to correct values in case we are filtered
+            oldIndex = this.state.tabs.indexOf(filteredTabs[oldIndex]);
+            newIndex = this.state.tabs.indexOf(filteredTabs[newIndex]);
+            // first optimistically move the tab to prevent a flash of moving it later
+            const newTabsArray = this.state.tabs.filter((t, i) => i !== oldIndex);
+            newTabsArray.splice(newIndex, 0, this.state.tabs[oldIndex]);
+            this.setState({tabs: newTabsArray});
+            api.fireMessage(messages.MOVE_TAB, {oldIndex, newIndex});
+          }}
           tabs={filteredTabs}
         />
       );

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {SortableElement} from 'react-sortable-hoc';
 
 import {tabPropType} from 'src/common/tabModel';
 
@@ -7,7 +8,7 @@ import './tabDisplay.less';
 
 const urlReplaceRegex = /^https?\:\/\/(www.)?/;
 
-export default function TabDisplay({tab, clickCallback, closeCallback}) {
+const TabDisplay = ({tab, clickCallback, closeCallback}) => {
   const favIcon = tab.favIcon ? <img className="Image-FavIcon" src={tab.favIcon}/> : null;
   const image = tab.image ? (
     <img className="Image-TabThumbnail" src={tab.image}/>
@@ -44,10 +45,13 @@ export default function TabDisplay({tab, clickCallback, closeCallback}) {
       {image}
     </div>
   );
-}
+};
 
 TabDisplay.propTypes = {
   clickCallback: PropTypes.func.isRequired,
   closeCallback: PropTypes.func.isRequired,
   tab: tabPropType,
 };
+
+const wrappedTabDisplay = SortableElement(TabDisplay);
+export default wrappedTabDisplay;

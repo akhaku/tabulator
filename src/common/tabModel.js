@@ -5,6 +5,7 @@ export class Tab {
     this.favIcon = chromeTabObject.favIconUrl;
     this.id = chromeTabObject.id;
     this.pinned = chromeTabObject.pinned;
+    this.realIndex = chromeTabObject.index;
     this.title = chromeTabObject.title;
     this.url = chromeTabObject.url;
     this.windowId = chromeTabObject.windowId;
@@ -26,6 +27,7 @@ export const tabPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   image: PropTypes.string,
   pinned: PropTypes.bool.isRequired,
+  realIndex: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   windowId: PropTypes.number.isRequired,
 });

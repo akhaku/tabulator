@@ -23,6 +23,12 @@ chrome.runtime.onMessage.addListener((message, unusedSender, unusedSendResponse)
     case messages.GO_TO_TAB:
       chrome.tabs.update(message.value, {active: true});
       break;
+    case messages.MOVE_TAB:
+      const tabId = window.tabs[message.value.oldIndex].id;
+      const realNewIndex = window.tabs[message.value.newIndex].realIndex;
+      chrome.tabs.move(tabId, {index: realNewIndex},
+        () => api.fireMessage(messages.TAB_MOVED));
+      break;
     default:
       console.warn(`Background page encountered unhandled message: ${message.type}`);
       break;
