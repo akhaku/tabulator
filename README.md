@@ -34,3 +34,6 @@ I also highly recommend updating the `build` script in `package.json`, replacing
 Just make sure you don't check those changes in.
 
 When you make changes, `npm run lint` to lint your changes, and `npm run build` to generate the changed files. For changes to the new tab page, refreshing that is sufficient, but for changes to the background page you'll need to either refresh the plugin, or refresh the background view from "inspect views" in <chrome://extensions>. Any changes to the manifest require an extension refresh, also from <chrome://extensions>.
+
+## Releasing
+Create a commit where the commit message is in the following format: "Bump to v1.0.1". That commit should update the verison number in package.json and manifest.json. Tag that commit with the version, eg "v1.0.1". Don't forget to push the tag to github. Next, `npm run build && npm run package`. Submit the generated tabulator.zip in the [Chrome developer dashboard](https://chrome.google.com/webstore/developer/dashboard).
