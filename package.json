@@ -13,27 +13,27 @@
   "author": "Ammar Khaku",
   "license": "ISC",
   "devDependencies": {
-    "babel-eslint": "^8.2.2",
-    "babel-loader": "^7.1.4",
+    "babel-eslint": "^8.2.5",
+    "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
-    "eslint": "^4.19.0",
+    "eslint": "^4.19.1",
     "eslint-config-evernote": "^3.0.1",
     "eslint-plugin-evernote": "^1.0.0",
-    "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-react": "^7.10.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
-    "less": "^3.0.1",
+    "less": "^3.5.3",
     "less-loader": "^4.1.0",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack": "^4.15.1",
+    "webpack-cli": "^2.1.5"
   },
   "dependencies": {
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-sortable-hoc": "^0.8.3"
   }
 }
