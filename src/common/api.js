@@ -5,12 +5,18 @@
 /**
  * Exposes the background page tab store to the newtab page.
  */
-export function getAllTabs() {
-  return chrome.extension.getBackgroundPage().tabs;
+export async function getAllTabs() {
+  return (await chrome.storage.local.get('tabs')).tabs;
 }
 
 export function fireMessage(messageType, messageValue) {
-  chrome.runtime.sendMessage({type: messageType, value: messageValue});
+  chrome.runtime.sendMessage({type: messageType, value: messageValue}).catch(error => {
+    if (error.message.includes('Receiving end does not exist')) {
+      console.debug(`No listener for message ${messageType} - this is normal if no tab is open`);
+    } else {
+      console.error(`Failed to send message ${messageType}:`, error);
+    }
+  });
 }
 
 /**
