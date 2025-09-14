@@ -3,7 +3,7 @@
 
   "name": "Tabulator",
   "author": "Ammar Khaku",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Manage your open tabs from the new tab page",
   "icons": {
     "128": "images/icon-128.png"
