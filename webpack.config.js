@@ -1,6 +1,5 @@
 const path = require('path');
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
@@ -15,19 +14,28 @@ module.exports = {
     }, {
       test: /\.less$/,
       exclude: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        use: ['css-loader', 'less-loader']
-      })
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+        'less-loader'
+      ]
     }]
   },
   plugins: [
-    new ExtractTextPlugin('[name].css')
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    })
   ],
   resolve: {
-    alias: {src: `${__dirname}/src`}
+    alias: {
+      src: path.resolve(__dirname, 'src')
+    }
   },
   output: {
-    path: path.resolve(__dirname, 'static/bundles')
+    path: path.resolve(__dirname, 'static/bundles'),
+    filename: '[name].js',
+    clean: true
   },
-  mode: process.env.NODE_ENV
+  mode: process.env.NODE_ENV || 'production',
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map'
 };

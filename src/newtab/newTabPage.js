@@ -18,7 +18,7 @@ export default class NewTabPage extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const messageNameToCallback = {};
     messageNameToCallback[messages.TAB_CLOSED] = this.refreshTabs;
     messageNameToCallback[messages.TAB_IMAGE_CAPTURED] = this.refreshTabs;
@@ -28,11 +28,11 @@ export default class NewTabPage extends React.Component {
     this.refreshTabs();
   }
 
-  refreshTabs = () => {
-    api.getCurrentWindowId().then(id => {
-      const tabs = api.getAllTabs().filter(t => t.windowId === id);
-      this.setState({tabs});
-    });
+  refreshTabs = async () => {
+    const id = await api.getCurrentWindowId();
+    const allTabs = await api.getAllTabs();
+    const tabs = allTabs ? allTabs.filter(t => t.windowId === id) : [];
+    this.setState({tabs});
   };
 
 
